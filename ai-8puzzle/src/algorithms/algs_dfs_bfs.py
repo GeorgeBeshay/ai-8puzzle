@@ -1,4 +1,5 @@
-from algs import *
+from algs import SearchAlgorithm
+from typing import List
 
 
 class DepthFirstSearch(SearchAlgorithm):
