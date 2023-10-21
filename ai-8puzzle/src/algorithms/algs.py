@@ -1,0 +1,23 @@
+from abc import ABC, abstractmethod
+from typing import List
+from algs_a_star import *
+from algs_dfs_bfs import *
+
+
+class SearchAlgorithm(ABC):
+    @abstractmethod
+    def search(self, start: int, goal: int) -> List[int]:
+        pass
+
+
+class AlgorithmFactory:
+    @staticmethod
+    def get_algorithm(algorithm_type: str, heuristic="Manhattan") -> SearchAlgorithm:
+        if algorithm_type.upper() == "DFS":
+            return DepthFirstSearch()
+        elif algorithm_type.upper() == "BFS":
+            return BreadthFirstSearch()
+        elif algorithm_type.upper() == "A*":
+            return AStar(heuristic)
+        else:
+            raise ValueError("Invalid algorithm type.")
