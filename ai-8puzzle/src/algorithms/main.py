@@ -1,5 +1,5 @@
-from algs import *
-from utilities import *
+from algs_factory import AlgorithmFactory
+from utilities import scan_3x3_matrix, convert_int_to_matrix, convert_matrix_to_int, scan_algorithm_type
 
 if __name__ == "__main__":
     # Creating an instance of the AlgorithmFactory
@@ -21,5 +21,6 @@ if __name__ == "__main__":
     Plan of integers states must be converted to a plan of matrix states
     """
     integers_plan = algorithm.search(integer_start_state, integer_goal_state)
+    print("Here ..", integers_plan)
     matrix_plan = [convert_int_to_matrix(integer_state) for integer_state in integers_plan]
     print(matrix_plan)

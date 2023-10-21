@@ -1,4 +1,5 @@
-from algs import *
+from typing import List
+from algs import SearchAlgorithm
 
 
 class AStar(SearchAlgorithm):
@@ -8,4 +9,4 @@ class AStar(SearchAlgorithm):
     def search(self, start: int, goal: int) -> List[int]:
         # Implementation of A* with the given heuristic
         print("A* Working ..")
-        return [0]
+        return [123456789]
