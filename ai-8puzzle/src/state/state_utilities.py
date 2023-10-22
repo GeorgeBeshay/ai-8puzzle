@@ -53,3 +53,27 @@ def move_zero(current_state: int, zeroPlace: int, anotherPlace: int) -> int:
     current_state = current_state & (~(15 << (anotherPlace * 4)))
     current_state = current_state | (extractAnotherNum << (zeroPlace * 4))
     return current_state
+
+
+def getPossiblePlaces(zeroPlace: int) -> List[int]:
+    result = []
+    match zeroPlace:
+        case 0:
+            result = [1, 3]
+        case 1:
+            result = [0, 2, 4]
+        case 2:
+            result = [1, 5]
+        case 3:
+            result = [0, 4, 6]
+        case 4:
+            result = [1, 3, 5, 7]
+        case 5:
+            result = [2, 4, 8]
+        case 6:
+            result = [3, 7]
+        case 7:
+            result = [4, 6, 8]
+        case 8:
+            result = [5, 7]
+    return result
