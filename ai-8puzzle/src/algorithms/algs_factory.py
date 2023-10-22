@@ -1,16 +1,15 @@
-from algs_a_star import AStar
-from algs_dfs_bfs import DepthFirstSearch, BreadthFirstSearch
-from algs import SearchAlgorithm
+from src.algorithms.algs_dfs_bfs import *
+from src.algorithms.algs_a_star import *
+from typing import List, Callable
 
 
-class AlgorithmFactory:
-    @staticmethod
-    def get_algorithm(algorithm_type: str, heuristic="Manhattan") -> SearchAlgorithm:
-        if algorithm_type.upper() == "DFS":
-            return DepthFirstSearch()
-        elif algorithm_type.upper() == "BFS":
-            return BreadthFirstSearch()
-        elif algorithm_type.upper() == "A*":
-            return AStar(heuristic)
-        else:
-            raise ValueError("Invalid algorithm type.")
+def algorithm_factory(algorithm_type: str, heuristic="Manhattan") -> Callable[[int, int], List[int]]:
+    algorithm_type = algorithm_type.upper()
+    if algorithm_type == "DFS":
+        return depth_first_search
+    elif algorithm_type == "BFS":
+        return breadth_first_search
+    elif algorithm_type == "A*":
+        return a_star
+    else:
+        raise ValueError("Invalid algorithm type")
