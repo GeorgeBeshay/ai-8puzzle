@@ -59,15 +59,15 @@ def getPossiblePlaces(zeroPlace: int) -> List[int]:
     result = []
     match zeroPlace:
         case 0:
-            result = [1, 3]
+            result = [3, 1]
         case 1:
-            result = [0, 2, 4]
+            result = [0, 4, 2]
         case 2:
             result = [1, 5]
         case 3:
-            result = [0, 4, 6]
+            result = [0, 6, 4]
         case 4:
-            result = [1, 3, 5, 7]
+            result = [1, 3, 7, 5]
         case 5:
             result = [2, 4, 8]
         case 6:
