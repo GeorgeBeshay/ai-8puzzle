@@ -27,12 +27,12 @@ class State:
         return result
 
     # TODO
-    def is_goal(self) -> bool:
+    def is_goal(self, custom_goal_state=36344967696) -> bool:
         """
         Function checks if the current state is equivalent to the goal state or not.
         :return: Boolean variable indicating the flag of the goal state.
         """
-        if self.value == 36344967696:        # Goal state integer value
+        if self.value == custom_goal_state:        # Goal state integer value
             return True
         else:
             return False
