@@ -35,7 +35,7 @@ def convert_int_to_1d(int_state: int) -> List[int]:
         # Extract each 4 bits (which represents a number) and put it in the array
         result = result + [int_state & 15]
         int_state = int_state >> 4
-    if(len(result) < 9):
+    if len(result) < 9:
         result = result + [0]
     return result
 

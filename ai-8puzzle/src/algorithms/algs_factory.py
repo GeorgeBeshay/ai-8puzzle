@@ -3,7 +3,7 @@ from src.algorithms.algs_a_star import *
 from typing import List, Callable
 
 
-def algorithm_factory(algorithm_type: str, heuristic="Manhattan") -> Callable[[int, int], List[int]]:
+def algorithm_factory(algorithm_type: str) -> Callable[[State, int], Solution]:
     algorithm_type = algorithm_type.upper()
     if algorithm_type == "DFS":
         return depth_first_search

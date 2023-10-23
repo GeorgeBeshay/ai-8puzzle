@@ -37,12 +37,7 @@ class State:
         else:
             return False
 
-# TODO remove those comments
-# array = [1, 2, 5, 8, 7, 6, 4, 0, 3]
-# print(array)
-# print("Getting its successors")
-# a = convert_1d_to_int(array)
-# s = State(a, 1, 1, 7)
-# successors = s.expand()
-# for i in range(len(successors)):
-#     print("State: ", convert_int_to_1d(successors[i].value), ", Zero_position: ", successors[i].zero_index)
+    def get_value(self): return self.value
+    def get_depth(self): return self.depth
+    def get_cost(self): return self.cost
+    def get_zero_index(self): return self.zero_index
