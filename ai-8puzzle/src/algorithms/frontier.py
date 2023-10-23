@@ -9,6 +9,8 @@ class Frontier:
         Args:
         data_structure: str that that specifies the data structure to use, either 'queue' or 'stack'
         """
+        if data_structure.lower() not in ["stack", "queue"]:
+            raise Exception("Wrong Data Type For Frontier")
         self.ds = data_structure
         self.frontier = []
 
