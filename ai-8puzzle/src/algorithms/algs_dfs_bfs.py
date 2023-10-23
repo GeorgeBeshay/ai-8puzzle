@@ -7,12 +7,15 @@ from src.state.state_utilities import convert_1d_to_int, convert_int_to_1d
 
 def init_datastructures(frontier: Frontier, explored_and_frontier: set, parent_map: dict, initial_state: State):
     """
-    Explain here
-    :param frontier:
-    :param explored_and_frontier:
-    :param parent_map:
-    :param initial_state:
-    :return:
+    Initiates the data structures used by the bfs and dfs
+
+    Args:
+        frontier: Frontier that represents the stack or the queue which stores the states to be expanded
+        explored_and_frontier: set contains elements either in the explored or the frontier
+        parent_map: dictionary that has the node and its parent
+        initial_state: The start state that is given
+
+    :returns: None
     """
     frontier.push(initial_state)
     explored_and_frontier.add(initial_state.value)
@@ -21,10 +24,15 @@ def init_datastructures(frontier: Frontier, explored_and_frontier: set, parent_m
 
 def depth_first_search(initial_state: State, integer_goal_state: int = 36344967696) -> Tuple[bool, dict]:
     """
-    Explain here
-    :param initial_state:
-    :param integer_goal_state:
-    :return:
+    Performs a depth first search to find a goal state in a search space starting from an initial_state
+
+    Args:
+        initial_state: State that represents initial state from which the search begins.
+        integer_goal_state: int representation of the goal state (default is 36344967696).
+
+    :returns:
+        Tuple[bool, dict]: A tuple containing a boolean value indicating whether a goal state was found or not,
+        and a dictionary that maps states to their parent states in the search tree (or an empty dictionary if initial state is not solvable).
     """
     no_of_explored = 0                                  # initially nothing is explored
     frontier = Frontier("stack")
@@ -53,10 +61,15 @@ def depth_first_search(initial_state: State, integer_goal_state: int = 363449676
 
 def breadth_first_search(initial_state: State, int_goal_state: int = 36344967696) -> Tuple[bool, dict]:
     """
-    Explain here
-    :param initial_state:
-    :param int_goal_state:
-    :return:
+    Performs a breadth first search to find a goal state in a search space starting from an initial_state
+
+    Args:
+        initial_state: State that represents initial state from which the search begins.
+        integer_goal_state: int representation of the goal state (default is 36344967696).
+
+    :returns:
+        Tuple[bool, dict]: A tuple containing a boolean value indicating whether a goal state was found or not,
+        and a dictionary that maps states to their parent states in the search tree (or an empty dictionary if initial state is not solvable).
     """
     no_of_explored = 0  # initially nothing is explored
     frontier = Frontier("queue")

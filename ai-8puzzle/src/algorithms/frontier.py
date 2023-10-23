@@ -1,15 +1,34 @@
+from src.state.state import State
+
 
 class Frontier:
     def __init__(self, data_structure="queue"):
-        """ data_structure: String that is either queue or stack """
+        """
+        Initializes a frontier object to be used for storing storing nodes and expanding them.
+
+        Args:
+        data_structure: str that that specifies the data structure to use, either 'queue' or 'stack'
+        """
         self.ds = data_structure
         self.frontier = []
 
+    def push(self, state: State):
+        """
+            Pushes a state onto the frontier.
 
-    def push(self, state):
+            Args:
+                state: The state to be added to the frontier.
+        """
         self.frontier.append(state)
 
     def pop(self):
+        """
+            Removes and returns a state from the frontier based on the specified data structure ('stack' or 'queue').
+
+            Returns:
+                The state removed from the frontier.
+        """
+
         if self.ds.lower() == "stack":
             ans = self.frontier.pop() # pop the last element in the list
         elif self.ds.lower() == "queue":
@@ -17,5 +36,11 @@ class Frontier:
         return ans
 
     def size(self):
+        """
+            Function that returns the number of elements in the frontier.
+
+            Returns:
+                The number of elements in the frontier.
+        """
         return len(self.frontier)
 
