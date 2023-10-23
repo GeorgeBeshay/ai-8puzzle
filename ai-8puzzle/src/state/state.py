@@ -38,11 +38,11 @@ class State:
             return False
 
 # TODO remove those comments
-# array = [6, 0, 1, 4, 5, 3, 2, 4, 7]
+# array = [1, 2, 5, 8, 7, 6, 4, 0, 3]
 # print(array)
 # print("Getting its successors")
 # a = convert_1d_to_int(array)
-# s = State(a, 1, 1, 1)
+# s = State(a, 1, 1, 7)
 # successors = s.expand()
 # for i in range(len(successors)):
-#     print("State: ", convert_int_to_1d(successors[i].value), ", Zero_position: ", successors[i].zero_position)
+#     print("State: ", convert_int_to_1d(successors[i].value), ", Zero_position: ", successors[i].zero_index)
