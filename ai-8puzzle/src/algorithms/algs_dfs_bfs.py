@@ -50,7 +50,8 @@ def depth_first_search(initial_state: State, integer_goal_state: int = 363449676
         if current_state.is_goal(integer_goal_state):       # note that 36344967696 is the default integer goal state.
             return True, parent_map
 
-        neighbors = current_state.expand()              # .reverse() gives error
+        neighbors = current_state.expand()
+        neighbors.reverse()
         for neighbor in neighbors:
             if neighbor.value not in explored_and_frontier:
                 frontier.push(neighbor)
