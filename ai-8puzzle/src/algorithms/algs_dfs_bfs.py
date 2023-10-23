@@ -51,7 +51,7 @@ def depth_first_search(initial_state: State, int_goal_state: int = 36344967696) 
         max_search_depth = max(max_search_depth, current_state.get_depth())
 
         if current_state.is_goal(int_goal_state):       # note that 36344967696 is the default integer goal state.
-            return Solution(True, parent_map, max_search_depth,
+            return Solution(True, parent_map, no_of_explored, max_search_depth,
                             current_state.get_cost(), int_goal_state)
 
         neighbors = current_state.expand()
@@ -92,7 +92,7 @@ def breadth_first_search(initial_state: State, int_goal_state: int = 36344967696
         max_search_depth = max(max_search_depth, current_state.get_depth())
 
         if current_state.is_goal(int_goal_state):
-            return Solution(True, parent_map, max_search_depth,
+            return Solution(True, parent_map, no_of_explored, max_search_depth,
                             current_state.get_cost(), int_goal_state)
 
         neighbors = current_state.expand()
@@ -115,6 +115,11 @@ for solution in solutions:
         while plan_step is not None:
             print(f'{plan_step[0]}\n{plan_step[1]}\n{plan_step[2]}\n\n')
             plan_step = solution.get_next_step()
+        print(f"Total Cost: {solution.get_cost()}")
+        print(f"Total Expanded Nodes: {solution.get_nodes_expanded()}")
+        print(f"Max Search Depth: {solution.get_max_search_depth()}")
+        print(f"First Step: {solution.get_first_step()}")
+        print(f"Last Step: {solution.get_last_step()}")
     else:
         print("Couldn't solve")
     print(" --------------------------------------- END --------------------------------------- ")
