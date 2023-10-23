@@ -41,3 +41,6 @@ class State:
     def get_depth(self): return self.depth
     def get_cost(self): return self.cost
     def get_zero_index(self): return self.zero_index
+
+    # def __lt__(self, other: 'State'):
+    #     return self.get_value() < other.get_value()
