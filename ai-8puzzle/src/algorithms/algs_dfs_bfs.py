@@ -88,7 +88,7 @@ s = State(convert_1d_to_int(init_state), 0, 0, 5)
 flag, par_map = depth_first_search(s)
 
 if flag:
-    temp_int_state = par_map.get(convert_1d_to_int([0, 1, 2, 3, 4, 5, 6, 7, 8]))
+    temp_int_state = convert_1d_to_int([0, 1, 2, 3, 4, 5, 6, 7, 8])
     while par_map.get(temp_int_state) != temp_int_state:
         print(convert_int_to_1d(temp_int_state))
         temp_int_state = par_map.get(temp_int_state)
