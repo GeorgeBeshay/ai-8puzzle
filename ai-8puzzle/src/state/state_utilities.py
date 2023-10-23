@@ -36,28 +36,27 @@ def convert_int_to_1d(int_state: int) -> List[int]:
     return result
 
 
-def move_zero(current_state: int, zeroPlace: int, anotherPlace: int) -> int:
+def move_zero(current_state: int, current_zero_position: int, new_zero_position: int) -> int:
     """
-    Move zero from its place to another place, and
-    Move the another number to place of Zero.
+    Swaps the zero from the current_zero_position to the new_zero_position
 
     Args:
-        current_state: int represent the value of current state
-        zeroPlace: the place of zero
-        anotherPlace: the place of another number
+        current_state: int represent the value of current state.
+        current_zero_position: current index of the zero.
+        new_zero_position: index of the element to be swapped with the zero (new index of the zero).
 
-    :returns
+    :returns:
          int: represent the value of new state
     """
-    extractAnotherNum = ((15 << (anotherPlace * 4)) & (current_state)) >> (anotherPlace * 4)
-    current_state = current_state & (~(15 << (anotherPlace * 4)))
-    current_state = current_state | (extractAnotherNum << (zeroPlace * 4))
+    extract_another_num = ((15 << (new_zero_position * 4)) & current_state) >> (new_zero_position * 4)
+    current_state = current_state & (~(15 << (new_zero_position * 4)))
+    current_state = current_state | (extract_another_num << (current_zero_position * 4))
     return current_state
 
 
-def getPossiblePlaces(zeroPlace: int) -> List[int]:
+def get_possible_indices(current_zero_position: int) -> List[int]:
     result = []
-    match zeroPlace:
+    match current_zero_position:
         case 0:
             result = [3, 1]
         case 1:
