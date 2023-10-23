@@ -13,6 +13,7 @@ def convert_1d_to_int(array_state: List[int]) -> int:
     """
     result = 0
     for i in range(len(array_state) - 1, 0, -1):
+        # Merge the result int with each number (each number will take 4 bits)
         result = result | array_state[i]
         result = result << 4
     result = result | array_state[0]
@@ -31,6 +32,7 @@ def convert_int_to_1d(int_state: int) -> List[int]:
     """
     result = []
     while int_state != 0:
+        # Extract each 4 bits (which represents a number) and put it in the array
         result = result + [int_state & 15]
         int_state = int_state >> 4
     return result
@@ -48,13 +50,22 @@ def move_zero(current_state: int, current_zero_position: int, new_zero_position:
     :returns:
          int: represent the value of new state
     """
+    # First extract the number which will be placed in place of zero
     extract_another_num = ((15 << (new_zero_position * 4)) & current_state) >> (new_zero_position * 4)
+    # Then make the location of that number to be zero
     current_state = current_state & (~(15 << (new_zero_position * 4)))
+    # Last place the extracted number in place of zero
     current_state = current_state | (extract_another_num << (current_zero_position * 4))
     return current_state
 
 
 def get_possible_indices(current_zero_position: int) -> List[int]:
+    """
+    Get all possible locations that the zero can be moved to it
+
+    :param current_zero_position: currently zero place
+    :return: possible locations the zero can be moved to it
+    """
     result = []
     match current_zero_position:
         case 0:
