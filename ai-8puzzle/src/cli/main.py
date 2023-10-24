@@ -21,5 +21,4 @@ if __name__ == "__main__":
         else:
             runGUI(sol)
 
-        os.system('clear')
         play_again = (input("Play again ? (Y / N): ").strip().upper()) == 'Y'

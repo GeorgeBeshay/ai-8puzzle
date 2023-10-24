@@ -5,13 +5,13 @@ from src.state.state import *
 from src.state.state_utilities import *
 from src.algorithms.algs_dfs_bfs import *
 
-background = "#15095A"
+background = "#1B1212"
 
 
 def runGUI(solution: Solution):
     root = tk.Tk()
-    root.geometry('350x350')
-    root.eval('tk::PlaceWindow . center')
+    root.geometry('500x500')
+    # root.eval('tk::PlaceWindow . center')
     root.config(bg=background)
     boardGUI = BoardGUI(root, solution)
     root.mainloop()
