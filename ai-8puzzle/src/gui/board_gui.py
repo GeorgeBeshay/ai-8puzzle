@@ -34,13 +34,13 @@ class BoardGUI:
         button_frame = tk.Frame(master, bg=background)
         button_frame.pack(pady=20)
         # Create buttons
-        next_button = tk.Button(button_frame, text="Next", bg=button_bg, padx=10, pady=5,
-                                borderwidth=2, command=self.get_next_step)
-        next_button.pack(side=tk.LEFT, padx=10)  # Use side=tk.LEFT and padx for spacing
-
         previous_button = tk.Button(button_frame, text="Previous", bg=button_bg, padx=10, pady=5,
                                     borderwidth=2, command=self.get_previous_state)
         previous_button.pack(side=tk.LEFT, padx=10)  # Use side=tk.LEFT and padx for spacing
+
+        next_button = tk.Button(button_frame, text="Next", bg=button_bg, padx=10, pady=5,
+                                borderwidth=2, command=self.get_next_step)
+        next_button.pack(side=tk.LEFT, padx=10)  # Use side=tk.LEFT and padx for spacing
 
         first_button = tk.Button(button_frame, text="First",bg=button_bg, padx=10, pady=5,
                                  borderwidth=2, command=self.get_first_state)
