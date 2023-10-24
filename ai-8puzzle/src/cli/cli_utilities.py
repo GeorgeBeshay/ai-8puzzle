@@ -1,6 +1,7 @@
 """
 Implementing all the utilities to be used when dealing with the CLI, such as scanning input, converting it, etc..
 """
+from typing import List
 
 
 def scan_algorithm_type():
@@ -37,6 +38,10 @@ def convert_2d_to_1d(matrix):
     """
     return [value for row in matrix for value in row]
 
+def zero_index(init_list: List[int]) -> int:
+    for i in range(len(init_list)):
+        if init_list[i] == 0:
+            return i
 
 def convert_1d_to_2d(arr):
     """

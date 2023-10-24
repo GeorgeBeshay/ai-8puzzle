@@ -200,22 +200,22 @@ def a_star(initial_state: State, int_goal_state: int = 36344967696, heuristic="M
 
 
 # TODO remove this
-init_state = [1, 2, 5, 3, 4, 0, 6, 7, 8]
-s = State(convert_1d_to_int(init_state), 0, 0, 5)
-# init_state = [1, 0, 2, 3, 4, 5, 6, 7, 8]
-# s = State(convert_1d_to_int(init_state), 0, 0, 1)
-solution = a_star(s)
-
-if solution.is_success():
-    plan_step = solution.get_next_step()
-    while plan_step is not None:
-        print(f'{plan_step[0]}\n{plan_step[1]}\n{plan_step[2]}\n\n')
-        plan_step = solution.get_next_step()
-    print(f"Total Cost: {solution.get_cost()}")
-    print(f"Total Expanded Nodes: {solution.get_nodes_expanded()}")
-    print(f"Max Search Depth: {solution.get_max_search_depth()}")
-    print(f"First Step: {solution.get_first_step()}")
-    print(f"Last Step: {solution.get_last_step()}")
-else:
-    print("Couldn't solve")
-print(" --------------------------------------- END --------------------------------------- ")
+# init_state = [1, 2, 5, 3, 4, 0, 6, 7, 8]
+# s = State(convert_1d_to_int(init_state), 0, 0, 5)
+# # init_state = [1, 0, 2, 3, 4, 5, 6, 7, 8]
+# # s = State(convert_1d_to_int(init_state), 0, 0, 1)
+# solution = a_star(s)
+#
+# if solution.is_success():
+#     plan_step = solution.get_next_step()
+#     while plan_step is not None:
+#         print(f'{plan_step[0]}\n{plan_step[1]}\n{plan_step[2]}\n\n')
+#         plan_step = solution.get_next_step()
+#     print(f"Total Cost: {solution.get_cost()}")
+#     print(f"Total Expanded Nodes: {solution.get_nodes_expanded()}")
+#     print(f"Max Search Depth: {solution.get_max_search_depth()}")
+#     print(f"First Step: {solution.get_first_step()}")
+#     print(f"Last Step: {solution.get_last_step()}")
+# else:
+#     print("Couldn't solve")
+# print(" --------------------------------------- END --------------------------------------- ")
