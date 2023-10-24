@@ -8,7 +8,8 @@ def generate_plan(parent_map: dict, int_goal_state: int) -> List[List[List[int]]
     temp_state: int = int_goal_state  # Start with the goal state
     while True and parent_map:  # While parent_map is not None
         # Convert the current state to a 2D list and append it to the plan
-        plan.append([convert_int_to_1d(temp_state)[i:i + 3] for i in range(0, 9, 3)])
+        arr_temp_state = convert_int_to_1d(temp_state)
+        plan.append([arr_temp_state[i:i + 3] for i in range(0, 9, 3)])
         if parent_map.get(temp_state) == temp_state:
             # If we reach the root state (where the initial state is
             # the parent of itself), exit the loop
