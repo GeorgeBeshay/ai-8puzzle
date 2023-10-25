@@ -4,6 +4,7 @@ from src.algorithms.solution import Solution
 from src.state.state import State
 from src.state.state_utilities import convert_1d_to_int, convert_int_to_1d
 from queue import PriorityQueue
+import time
 
 
 def get_heuristic(heuristic_type: str) -> Callable[[int, int], int]:
@@ -146,7 +147,8 @@ def a_star(initial_state: State, int_goal_state: int = 36344967696, heuristic="M
         The choice of heuristic influences the search efficiency, however in our assignment we've been asked to
         utilize only the Manhattans distance and the Euclidean distance as our possible heuristics.
         """
-
+    # The time at the start of the algorithm, will be used later to calculate the running time
+    starting_time = time.time()
     # Creation and Initialization of algorithm data_structures
     frontier = PriorityQueue()      # lowest priority first
     # we will need to check for the presence of a state in the frontier, so to avoid the O(n) procedure when
@@ -180,7 +182,7 @@ def a_star(initial_state: State, int_goal_state: int = 36344967696, heuristic="M
             # that takes a parent map as a dict[int, int], so we convert it to a new dict, dropping the cost term.
             new_parent_map: Dict[int, int] = {key: value[0] for key, value in parent_map.items()}
             return Solution(True, new_parent_map, explored_states_count,
-                            max_search_depth, current_state.get_cost(), int_goal_state)
+                            max_search_depth, current_state.get_cost(), int_goal_state, time.time() - starting_time)
 
         for neighbor in current_state.expand():
             # first case, that the neighbor was the first time being "seen"
@@ -196,26 +198,4 @@ def a_star(initial_state: State, int_goal_state: int = 36344967696, heuristic="M
                     frontier.put((temp_f_of_n, neighbor))
                     frontier_set.add(neighbor.get_value())
                     parent_map[neighbor.get_value()] = (current_state.get_value(), temp_f_of_n)
-    return Solution(False)
-
-
-# TODO remove this
-init_state = [1, 2, 5, 3, 4, 0, 6, 7, 8]
-s = State(convert_1d_to_int(init_state), 0, 0, 5)
-# init_state = [1, 0, 2, 3, 4, 5, 6, 7, 8]
-# s = State(convert_1d_to_int(init_state), 0, 0, 1)
-solution = a_star(s)
-
-if solution.is_success():
-    plan_step = solution.get_next_step()
-    while plan_step is not None:
-        print(f'{plan_step[0]}\n{plan_step[1]}\n{plan_step[2]}\n\n')
-        plan_step = solution.get_next_step()
-    print(f"Total Cost: {solution.get_cost()}")
-    print(f"Total Expanded Nodes: {solution.get_nodes_expanded()}")
-    print(f"Max Search Depth: {solution.get_max_search_depth()}")
-    print(f"First Step: {solution.get_first_step()}")
-    print(f"Last Step: {solution.get_last_step()}")
-else:
-    print("Couldn't solve")
-print(" --------------------------------------- END --------------------------------------- ")
+    return Solution(False, running_time=(time.time() - starting_time))

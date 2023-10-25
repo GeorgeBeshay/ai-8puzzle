@@ -1,10 +1,11 @@
 import tkinter as tk
 from src.algorithms.solution import *
 
-background = "#15095A"
+background = "#1B1212"
 board = "#CD7F32"
-button_bg = "#13C2D3"
-border = "#080445"
+button_bg = "#FFC000"
+border = "#7B3F00"
+text_background = "#4169E1"
 
 class BoardGUI:
     def __init__(self, master, solution: Solution):
@@ -15,6 +16,21 @@ class BoardGUI:
         self.current_step = solution.get_first_step()
         self.solution = solution
 
+        # Create frame for the text to be printed
+        text_frame = tk.Frame(master=master, bg=border, bd=2)
+        text = "Total Cost: " + str(solution.get_cost()) + "\n"
+        text += "Total Expanded Nodes: " + str(solution.get_nodes_expanded()) + "\n"
+        text += "Max Search Depth: " + str(solution.get_max_search_depth()) + "\n"
+        text += "Time Elapsed: {:.5f} seconds".format(solution.get_running_time())
+
+
+        label = tk.Label(
+            text_frame, text=text, font=("Helvetica", 10),
+            bg=text_background, relief=tk.RAISED, borderwidth=2, fg="white", pady=10, padx=10
+        )
+        label.grid(row=0, column=1)
+        text_frame.pack(pady=20)
+
         # Create frame for the board
         board_frame = tk.Frame(master, bg=border, bd=2)
         board_frame.pack(pady=20)
@@ -23,8 +39,11 @@ class BoardGUI:
         for i in range(self.dimension):
             for j in range(self.dimension):
                 tile_value = self.current_step[i][j]
+                text = ""
+                if(tile_value != 0):
+                    text = str(tile_value)
                 label = tk.Label(
-                    board_frame, text=str(tile_value), width=4, height=2, font=("Helvetica", 20),
+                    board_frame, text=text, width=4, height=2, font=("Helvetica", 20),
                     bg=board, relief=tk.RAISED, borderwidth=2
                 )
                 label.grid(row=i, column=j)
@@ -79,5 +98,8 @@ class BoardGUI:
         for i in range(self.dimension):
             for j in range(self.dimension):
                 tile_value = self.current_step[i][j]
-                self.tiles[(i, j)].config(text=str(tile_value))
+                text = ""
+                if(tile_value != 0):
+                    text = str(tile_value)
+                self.tiles[(i, j)].config(text=text)
 
