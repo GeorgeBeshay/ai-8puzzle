@@ -6,7 +6,7 @@ from src.algorithms.frontier import Frontier
 from src.algorithms.solution import Solution
 
 
-class TestSearchAlgorithms(unittest.TestCase):
+class TestSearchAlgorithms1(unittest.TestCase):
     def setUp(self):
         # Initialize test state
         self.initial_state = State(value=convert_1d_to_int([3, 5, 1, 0, 2, 7, 4, 8, 6]), depth=0, cost=0, zero_index=3)

@@ -6,7 +6,7 @@ from src.algorithms.frontier import Frontier
 from src.algorithms.solution import Solution
 
 
-class TestSearchAlgorithms(unittest.TestCase):
+class TestSearchAlgorithms3(unittest.TestCase):
     def test_dfs_finds_solution_if_exists(self):
         initial_state = State(value=convert_1d_to_int([3, 5, 1, 0, 2, 7, 4, 8, 6]), depth=0, cost=0, zero_index=3)
         solution = depth_first_search(initial_state)
