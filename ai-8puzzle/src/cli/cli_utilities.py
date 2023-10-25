@@ -77,17 +77,32 @@ def display_in_2d(matrix):
     print(f'{matrix[0]}\n{matrix[1]}\n{matrix[2]}\n\n')
 
 
+def scan_step_to_display(solution: Solution):
+    state_to_display = int(input("Enter the desired option number:\n1- First Step (1)\n2- Previous Step (2)\n"
+                                 "3- Next Step (3)\n4- Last Step (4)\n5- Exit (5)\n").split()[0])
+    match state_to_display:
+        case 1:
+            return True, solution.get_first_step()
+        case 2:
+            return True, solution.get_prev_step()
+        case 3:
+            return True, solution.get_next_step()
+        case 4:
+            return True, solution.get_last_step()
+        case 5:
+            return False, None
+
+
 def display_solution(solution: Solution):
     if solution.is_success():
-        plan_step = solution.get_next_step()
-        while plan_step is not None:
-            display_in_2d(plan_step)
-            plan_step = solution.get_next_step()
         print(f"Total Cost: \t\t\t{solution.get_cost()}")
         print(f"Total Expanded Nodes: {solution.get_nodes_expanded()}")
         print(f"Max Search Depth: {solution.get_max_search_depth()}")
-        print(f"First Step: {solution.get_first_step()}")
-        print(f"Last Step: {solution.get_last_step()}")
+
+        still_querying, step = scan_step_to_display(solution)
+        while still_querying:
+            display_in_2d(step)
+            still_querying, step = scan_step_to_display(solution)
     else:
         print("Couldn't solve")
     print(f"Time Elapsed: {solution.get_running_time() :.2f} seconds")
