@@ -4,6 +4,7 @@ from src.algorithms.frontier import Frontier
 from src.state.state import State
 from src.state.state_utilities import convert_1d_to_int, convert_int_to_1d
 from src.algorithms.solution import Solution
+import time
 
 
 def init_datastructures(frontier: Frontier, explored_and_frontier: set, parent_map: dict, initial_state: State):
@@ -35,6 +36,8 @@ def depth_first_search(initial_state: State, int_goal_state: int = 36344967696) 
         Tuple[bool, dict]: A tuple containing a boolean value indicating whether a goal state was found or not,
         and a dictionary that maps states to their parent states in the search tree (or an empty dictionary if initial state is not solvable).
     """
+    # The time at the start of the algorithm, will be used later to calculate the running time
+    starting_time = time.time()
     no_of_explored = 0                                  # initially nothing is explored
     frontier = Frontier("stack")
     explored = set()
@@ -52,7 +55,7 @@ def depth_first_search(initial_state: State, int_goal_state: int = 36344967696) 
 
         if current_state.is_goal(int_goal_state):       # note that 36344967696 is the default integer goal state.
             return Solution(True, parent_map, no_of_explored, max_search_depth,
-                            current_state.get_cost(), int_goal_state)
+                            current_state.get_cost(), int_goal_state, time.time() - starting_time)
 
         neighbors = current_state.expand()
         neighbors.reverse()
@@ -61,7 +64,7 @@ def depth_first_search(initial_state: State, int_goal_state: int = 36344967696) 
                 frontier.push(neighbor)
                 explored_and_frontier.add(neighbor.value)
                 parent_map[neighbor.value] = current_state.value
-    return Solution(False)
+    return Solution(False, running_time=(time.time() - starting_time))
 
 
 def breadth_first_search(initial_state: State, int_goal_state: int = 36344967696) -> Solution:
@@ -76,6 +79,7 @@ def breadth_first_search(initial_state: State, int_goal_state: int = 36344967696
         Tuple[bool, dict]: A tuple containing a boolean value indicating whether a goal state was found or not,
         and a dictionary that maps states to their parent states in the search tree (or an empty dictionary if initial state is not solvable).
     """
+    starting_time = time.time()
     no_of_explored = 0  # initially nothing is explored
     frontier = Frontier("queue")
     explored = set()
@@ -93,7 +97,7 @@ def breadth_first_search(initial_state: State, int_goal_state: int = 36344967696
 
         if current_state.is_goal(int_goal_state):
             return Solution(True, parent_map, no_of_explored, max_search_depth,
-                            current_state.get_cost(), int_goal_state)
+                            current_state.get_cost(), int_goal_state, time.time() - starting_time)
 
         neighbors = current_state.expand()
         for neighbor in neighbors:
@@ -101,25 +105,4 @@ def breadth_first_search(initial_state: State, int_goal_state: int = 36344967696
                 frontier.push(neighbor)
                 explored_and_frontier.add(neighbor.value)
                 parent_map[neighbor.value] = current_state.value
-    return Solution(False)
-
-
-# TODO remove this
-init_state = [1, 2, 5, 3, 4, 0, 6, 7, 8]
-s = State(convert_1d_to_int(init_state), 0, 0, 5)
-solutions = [depth_first_search(s), breadth_first_search(s)]
-
-# for solution in solutions:
-#     if solution.is_success():
-#         plan_step = solution.get_next_step()
-#         while plan_step is not None:
-#             print(f'{plan_step[0]}\n{plan_step[1]}\n{plan_step[2]}\n\n')
-#             plan_step = solution.get_next_step()
-#         print(f"Total Cost: {solution.get_cost()}")
-#         print(f"Total Expanded Nodes: {solution.get_nodes_expanded()}")
-#         print(f"Max Search Depth: {solution.get_max_search_depth()}")
-#         print(f"First Step: {solution.get_first_step()}")
-#         print(f"Last Step: {solution.get_last_step()}")
-#     else:
-#         print("Couldn't solve")
-#     print(" --------------------------------------- END --------------------------------------- ")
+    return Solution(False, running_time=(time.time() - starting_time))

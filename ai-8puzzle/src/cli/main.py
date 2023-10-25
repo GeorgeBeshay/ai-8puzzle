@@ -1,28 +1,36 @@
 from src.algorithms.algs_factory import *
 from cli_utilities import *
 from src.state.state_utilities import *
+import time
+import os
+from src.gui.draw_gui import runGUI
 
 if __name__ == "__main__":
-    # Creating an instance of the AlgorithmFactory
-
-    # Scan a 3x3 matrix
-    matrix_state = scan_3x3_matrix()
-    print("Scanned 3x3 matrix: ", matrix_state)
-    array_start_state = convert_2d_to_1d(matrix_state)
-    int_start_state = convert_1d_to_int(array_start_state)
-    array_goal_state = convert_2d_to_1d([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
-    int_goal_state = convert_1d_to_int(array_goal_state)
-
-    # Scan the required search algorithm to be used
-    alg_name = scan_algorithm_type()
-    print("Selected Algorithm: ", alg_name)
-    algorithm = algorithm_factory(alg_name)
-
-    """
-    Apply the algorithm, the plan is the set of sequential steps (integer states) to be applied to reach the goal.
-    Plan of integers states must be converted to a plan of matrix states
-    """
-    integers_plan = algorithm(int_start_state, int_goal_state)
-    print("Here ..", integers_plan)
-    matrix_plan = [convert_int_to_1d(integer_state) for integer_state in integers_plan]
-    print(matrix_plan)
+    '''
+    This code is the main entry point for a puzzle-solving program. It follows the flow:
+    1. Initialize a play_again flag to True to start the game loop.
+    2. Inside the loop, it does the following:
+       a. Scans the input puzzle and determines the position of the zero element.
+       b. Scans and selects the search algorithm to be used.
+       c. Prompts the user to choose between a graphical or text-based interface.
+       d. Solves the puzzle using the chosen algorithm.
+       e. Depending on the user's interface choice, either displays the solution in text or runs a GUI.
+       f. Asks the user if they want to play again and continues if they choose 'Y'.
+    3. The game loop continues until the user decides not to play again.
+    '''
+    play_again = True
+    while play_again:
+        # Scan the input, and prepare the algorithm input.
+        initial_state, zero_pos = scan_input()
+        # Scan the required search algorithm to be used.
+        algorithm = algorithm_factory(scan_algorithm_type())
+        # Choosing the desired interface
+        in_gui = (input("Display result in GUI ? (Y / N): ").strip().upper()) == 'Y'
+        # Solve the problem
+        sol = algorithm(State(initial_state, 0, 0, zero_pos))
+        # Displaying in the proper interface.
+        if not in_gui or not sol.is_success():
+            display_solution(sol)
+        else:
+            runGUI(sol)
+        play_again = (input("Play again ? (Y / N): ").strip().upper()) == 'Y'

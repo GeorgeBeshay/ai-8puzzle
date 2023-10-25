@@ -8,7 +8,8 @@ def generate_plan(parent_map: dict, int_goal_state: int) -> List[List[List[int]]
     temp_state: int = int_goal_state  # Start with the goal state
     while True and parent_map:  # While parent_map is not None
         # Convert the current state to a 2D list and append it to the plan
-        plan.append([convert_int_to_1d(temp_state)[i:i + 3] for i in range(0, 9, 3)])
+        arr_temp_state = convert_int_to_1d(temp_state)
+        plan.append([arr_temp_state[i:i + 3] for i in range(0, 9, 3)])
         if parent_map.get(temp_state) == temp_state:
             # If we reach the root state (where the initial state is
             # the parent of itself), exit the loop
@@ -45,7 +46,7 @@ class Solution:
         get_cost(): Returns the cost of the solution.
     """
     def __init__(self, success: bool, parent_map: dict = None, nodes_expanded: int = 0,
-                 max_search_depth: int = 0, cost: int = 0, int_goal_state: int = 0):
+                 max_search_depth: int = 0, cost: int = 0, int_goal_state: int = 0, running_time: float = 0):
         self.success = success  # Flag indicating whether the solution was successful
         # Maximum depth reached by the searching algorithm (not the solution depth)
         self.max_search_depth = max_search_depth
@@ -53,6 +54,7 @@ class Solution:
         self.plan: List[List[List[int]]] = generate_plan(parent_map, int_goal_state)  # Generate and store the plan
         self.iterator = 0  # Initialize an iterator to navigate through the plan
         self.nodes_expanded = nodes_expanded   # Total number of nodes expanded during the searching algorithm
+        self.running_time = running_time
 
     # Method to get the next step in the plan
     def get_next_step(self):
@@ -96,3 +98,5 @@ class Solution:
     def get_cost(self): return self.cost
     # Method to get the total number of nodes expanded during the search algorithm
     def get_nodes_expanded(self): return self.nodes_expanded
+    # Method to get the running time of the algorithm.
+    def get_running_time(self): return self.running_time

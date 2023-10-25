@@ -9,6 +9,9 @@ class State:
         self.cost = cost
         self.zero_index = zero_index
 
+    def __lt__(self, other: 'State'):
+        return self.get_depth() <= other.get_depth()
+
     # TODO: What the value of cost of each successor
     def expand(self) -> List['State']:
         """
