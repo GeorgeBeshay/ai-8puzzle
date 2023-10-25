@@ -130,7 +130,7 @@ def display_solution(solution: Solution):
     :return: void
     """
 
-    print(f"Time Elapsed: {solution.get_running_time() :.2f} seconds")
+    print(f"Time Elapsed: {solution.get_running_time() :.5f} seconds")
     if solution.is_success():
         print(f"Total Cost: \t\t\t{solution.get_cost()}")
         print(f"Total Expanded Nodes: {solution.get_nodes_expanded()}")

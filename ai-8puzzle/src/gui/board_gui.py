@@ -21,7 +21,7 @@ class BoardGUI:
         text = "Total Cost: " + str(solution.get_cost()) + "\n"
         text += "Total Expanded Nodes: " + str(solution.get_nodes_expanded()) + "\n"
         text += "Max Search Depth: " + str(solution.get_max_search_depth()) + "\n"
-        text += "Total running time: " + str(solution.get_running_time())
+        text += "Time Elapsed: {:.5f} seconds".format(solution.get_running_time())
 
 
         label = tk.Label(
